@@ -1,0 +1,18 @@
+---
+- hosts: buildbox
+  remote_user: ubuntu
+  become: yes
+  tasks:
+  - name: install ansible repository
+    apt_repository: repo='ppa:ansible/ansible'
+  - name: install ansible to latest version
+    apt: pkg={{ item }} state=latest update_cache=yes
+    with_items:
+      - ansible
+      - git
+  - name: remove default ansible hosts file
+    file: path=/etc/ansible/hosts state=absent
+  - name: copy directory to buildbox
+    copy: src=buildbox/hosts dest=/etc/ansible mode=0755
+  - name: config ssh config file
+    lineinfile: dest=/etc/ssh/ssh_config line='    StrictHostKeyChecking no'

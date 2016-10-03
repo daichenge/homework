@@ -3,3 +3,9 @@ access: AKIAIEOJDQPVSO3H62OQ
 secret: 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
 region: ap-southeast-1
 keyname: slim-key
+keypath: vars/id_rsa.pub
+vpcid: vpc-944282f0
+buildbox_cidr: ['10.1.0.0/16','111.207.139.131/32']
+ami_id: ami-21d30f42
+instance_type: t2.micro
+vpc_subnet_id: subnet-f9c4758f

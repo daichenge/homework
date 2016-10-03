@@ -4,5 +4,5 @@
   vars_files:
   - vars/aws.yaml
   tasks:
-  - include: vpc.yaml
-  - include: ec2-key.yaml
+  - include: 02-ec2-sg.yaml
+  - include: 02-ec2-instance.yaml

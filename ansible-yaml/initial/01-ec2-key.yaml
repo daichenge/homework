@@ -1,0 +1,9 @@
+- name: create an initial key
+  ec2_key:
+    region: "{{ region }}"
+    aws_secret_key: "{{ secret }}"
+    aws_access_key: "{{ access }}"
+    name: "{{ keyname }}"
+    state: present
+    key_material: "{{ item }}"
+  with_file: "{{ keypath }}"
