@@ -1,0 +1,8 @@
+---
+- hosts: local
+  remote_user: ubuntu
+  vars_files:
+  - vars/aws.yaml
+  tasks:
+  - include: vpc.yaml
+  - include: ec2-key.yaml

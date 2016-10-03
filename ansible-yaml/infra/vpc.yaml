@@ -1,0 +1,18 @@
+- ec2_vpc:
+    region: "{{ region }}"
+    aws_secret_key: "{{ secret }}"
+    aws_access_key: "{{ access }}"
+    state: present
+    cidr_block: 10.1.0.0/16
+    resource_tags: { "Name":"slim-test-vpc" }
+    subnets:
+      - cidr: 10.1.1.0/24
+        resource_tags: { "Tier" : "Web" }
+    internet_gateway: True
+    route_tables:
+      - subnets:
+          - 10.1.1.0/24
+        routes:
+          - dest: 0.0.0.0/0
+            gw: igw
+  register: vpc
