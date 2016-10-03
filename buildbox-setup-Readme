@@ -1,0 +1,34 @@
+1. please setup latest Ansible on your local machine. Make sure Ansible version larger than 2.0
+2. config local Inventory(/etc/ansible/hosts) for root. for example:
+[local]
+127.0.0.1 ansible_user=ubuntu ansible_sudo_pass=ubuntu ansible_ssh_pass=ubuntu
+3. create an user on AWS IAM and give admin access right to it.
+4. create Access Key and download it.
+5. get initial code from github
+git clone https://github.com/daichenge/homework.git
+6. config the parameter on the git clone directory(ansible-yaml/initial/vars/aws.yaml)
+for example:
+---
+access: AKIAIEOJDQPVSO3H62OQ  #aws_access_key
+secret: eLjIPdlbnB7JiuWK5D9Z+NFZkfLr/zlfquvp8Rwe #aws_secret_key
+region: ap-southeast-1 #region
+keyname: slim-key #EC2 keypair name
+keypath: vars/id_rsa.pub #keypair public key path(you need to generate ssh-key using ssh-keygen)
+7. run ansible-playbook to setup the initial vpc (make sure you r using root to run ansible-playbook)
+ansible-playbook base.yaml
+8. add the parameters into ansible-yaml/initial/vars/aws.yaml
+vpcid: vpc-944282f0 #vpcid
+buildbox_cidr: ['10.1.0.0/16','111.207.139.131/32'] #cidr for ssh source host to buildbox
+ami_id: ami-21d30f42 #ami for boot up buildbox
+instance_type: t2.micro #instance type for buildbox
+vpc_subnet_id: subnet-f9c4758f # subnet id for buildbox
+9. run ansible-playbook to setup buildbox instance (make sure you r using root to run ansible-playbook)
+ansible-playbook buildbox.yaml
+10. config local ansible Inventory adding buildbox and have a test
+ansible buildbox -m ping
+11. change ansible-yaml/initial/buildbox/hosts/ec2.ini, find the following lines and replace them as you want
+regions = ap-southeast-1 #region where your buildbox locate
+aws_access_key_id = AKIAJNVLQD3NBQ7MPFTA #aws_access_key
+aws_secret_access_key = bqVk0hUe/zx+BhPpLPuK5mpbPdkWRs8qbQmSLYlY #aws_secret_key
+12. initial buildbox
+ansible-playbook bb-init.yaml
