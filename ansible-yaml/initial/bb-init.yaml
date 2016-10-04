@@ -10,9 +10,19 @@
     with_items:
       - ansible
       - git
+      - python-pip
+  - name: install boto
+    command: pip install boto
   - name: remove default ansible hosts file
     file: path=/etc/ansible/hosts state=absent
   - name: copy directory to buildbox
-    copy: src=buildbox/hosts dest=/etc/ansible mode=0755
+    copy: src={{ item }} dest=/etc/ansible mode=0755
+    with_items:
+      - 'buildbox/hosts'
+      - 'buildbox/ansible.cfg'
+  - name: copy ssh directory to buildbox
+    copy: src='buildbox/.ssh' dest=/home/ubuntu mode=0755
+  - name: add aws env to profile
+    lineinfile: dest=/etc/bash.bashrc line="export AWS_ACCESS_KEY_ID=AKIAIVXNV57WJQXMHNKQ\nexport AWS_SECRET_ACCESS_KEY=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"
   - name: config ssh config file
     lineinfile: dest=/etc/ssh/ssh_config line='    StrictHostKeyChecking no'
