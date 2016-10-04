@@ -23,6 +23,6 @@
   - name: copy ssh directory to buildbox
     copy: src='buildbox/.ssh' dest=/home/ubuntu mode=0755
   - name: add aws env to profile
-    lineinfile: dest=/etc/bash.bashrc line="export AWS_ACCESS_KEY_ID=AKIAIVXNV57WJQXMHNKQ\nexport AWS_SECRET_ACCESS_KEY=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"
+    lineinfile: dest=/etc/bash.bashrc line="export AWS_ACCESS_KEY_ID= \nexport AWS_SECRET_ACCESS_KEY="
   - name: config ssh config file
     lineinfile: dest=/etc/ssh/ssh_config line='    StrictHostKeyChecking no'
