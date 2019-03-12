@@ -9,8 +9,8 @@ git clone https://github.com/daichenge/homework.git
 6. config the parameter on the git clone directory(ansible-yaml/initial/vars/aws.yaml)
 for example:
 ---
-access: AKIAIEOJDQPVSO3H62OQ  #aws_access_key
-secret: eLjIPdlbnB7JiuWK5D9Z+NFZkfLr/zlfquvp8Rwe #aws_secret_key
+access: dddd  #aws_access_key
+secret: ddddd+NFZkfLr/zlfquvp8Rwe #aws_secret_key
 region: ap-southeast-1 #region
 keyname: slim-key #EC2 keypair name
 keypath: vars/id_rsa.pub #keypair public key path(you need to generate ssh-key using ssh-keygen)
@@ -28,7 +28,7 @@ ansible-playbook buildbox.yaml
 ansible buildbox -m ping
 11. change ansible-yaml/initial/buildbox/hosts/ec2.ini, find the following lines and replace them as you want
 regions = ap-southeast-1 #region where your buildbox locate
-aws_access_key_id = AKIAJNVLQD3NBQ7MPFTA #aws_access_key
-aws_secret_access_key = bqVk0hUe/zx+BhPpLPuK5mpbPdkWRs8qbQmSLYlY #aws_secret_key
+aws_access_key_id = ddd #aws_access_key
+aws_secret_access_key = dddd/dddd+dddd #aws_secret_key
 12. initial buildbox
 ansible-playbook bb-init.yaml
